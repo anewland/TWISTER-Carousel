@@ -1,0 +1,194 @@
+// -SASS VARIABLES
+$red: #ef1945;
+$black: #000000;
+$white: #ffffff;
+$grey: #acacac;
+
+.twister {
+    position: relative;
+    width: 100%;
+    height: 350px;
+    text-align: center;
+    margin: 0 auto;
+    cursor: pointer;
+    overflow: hidden;
+
+    .carousel--inner {
+        position: absolute;
+
+        &:after {
+            content: "";
+            display: table;
+            clear: both;
+        }
+
+        .card {
+            float: left;
+            -webkit-box-sizing: border-box;
+                    box-sizing: border-box;
+            min-height: 350px;
+
+            h2 {
+                text-align: center;
+                width: 100%;
+            }
+        }
+    }
+
+    .dots--wrapper {
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-pack: center;
+            -ms-flex-pack: center;
+                justify-content: center;
+        -webkit-box-align: center;
+            -ms-flex-align: center;
+                align-items: center;
+        position: absolute;
+        bottom: 20px;
+        width: 100%;
+
+        li {
+            $dotSize: 11px; // SET THE SIZE OF THE DOT
+            width: $dotSize;
+            height: $dotSize;
+            background-color: white;
+            border-radius: 50%;
+            margin: 0 6px;
+            opacity: 0.2;
+            cursor: pointer;
+            -webkit-transition: ease-in 0.2s;
+            transition: ease-in 0.2s;
+            list-style: none;
+
+            &.active, &:hover {
+                opacity: 0.8;
+                margin: 0 4px;
+                height: $dotSize*1.4;
+                width: $dotSize*1.4;
+            }
+        }
+    }
+}
+
+.item {
+    &1 { background: -webkit-gradient(linear, left top, left bottom, from(#e66465), to(#9198e5)); background: linear-gradient(#e66465, #9198e5); }
+    &2 { background-image: -webkit-gradient(linear, left top, left bottom, from(#4af4d4), to(#e5bf91)); background-image: linear-gradient(#4af4d4, #e5bf91); }
+    &3 { background-image: -webkit-gradient(linear, left top, left bottom, from(#d064e6), to(#b191e5)); background-image: linear-gradient(#d064e6, #b191e5); }
+    &4 { background-image: -webkit-gradient(linear, left top, left bottom, from(#8fe664), to(#95e591)); background-image: linear-gradient(#8fe664, #95e591); }
+    &5 { background-image: -webkit-gradient(linear, left top, left bottom, from(#d0e664), to(#9198e5)); background-image: linear-gradient(#d0e664, #9198e5); }
+}
+
+//----------------- BUTTON + ARROWS ----------------//
+// Sizes the arrow buttons based on the variables in the below code.
+$size: 1.2;
+
+button {
+    background: none;
+    border: none;
+    //outline: none;
+    cursor: pointer;
+    position: absolute;
+    z-index: 99;
+    top: 38%;
+    opacity: 0.5;
+    -webkit-transition: ease-in 0.2s;
+    transition: ease-in 0.2s;
+
+    &:active {
+        border: none;
+    }
+
+    &:hover {
+        opacity: 1;
+    }
+
+    &.prevBtn {
+        left: 0;
+    }
+
+    &.nextBtn {
+        right: 0;
+    }
+}
+
+.arrow {
+    position: relative;
+    display: inline-block;
+    margin: 0;
+    padding: 10px*$size;
+    //width: 100%;
+    //height: 100%;
+    border-radius: 100%;
+    border: 0.2em solid transparent;
+
+    &::after {
+        content: '@';
+        text-indent: -9999px;
+        display: inline-block;
+        width: 1.5em*$size;
+        height: 1.5em*$size;
+        margin-top: 0.4em*$size;
+        margin-right: 0.4em*$size;
+        //set tickness
+        border-top: 0.3em*$size solid $black;
+        border-right: 0.3em*$size solid $black;
+    }
+
+    &.right {
+        -webkit-transform: rotate(45deg);
+                transform: rotate(45deg);
+    }
+
+    &.left {
+        -webkit-transform: rotate(225deg);
+                transform: rotate(225deg);
+    }
+
+    &.circle {
+        border: 0.2em solid $black;
+        &.red   { border-color: $red; }
+        &.grey  { border-color: $grey; }
+        &.white { border-color: $white; }
+    }
+
+    &.fill {
+        background-color: $black;
+
+        &.red  {
+            background-color: $red;
+            &::after { border-color: $white; }
+        }
+
+        &.grey, &.gray {
+            background-color: $grey;
+            &::after { border-color: $white; }
+        }
+
+        &.white {
+            background-color: $white;
+            &::after { border-color: $black; }
+        }
+
+        &::after {
+            border-color: $white;
+        }
+    }
+
+    //colors
+    &.red {
+        color: $red;
+        &::after { border-color: $red; }
+    }
+
+    &.grey, &.gray {
+        color: $grey;
+        &::after { border-color: $grey; }
+    }
+
+    &.white {
+        color: $white;
+        &::after { border-color: $white; }
+    }
+}
