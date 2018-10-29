@@ -49,11 +49,11 @@ $grey: #acacac;
         bottom: 20px;
         width: 100%;
 
+        $dotSize: 11px; // SET THE SIZE OF THE DOT
         li {
-            $dotSize: 11px; // SET THE SIZE OF THE DOT
             width: $dotSize;
             height: $dotSize;
-            background-color: white;
+            background-color: #ffffff;
             border-radius: 50%;
             margin: 0 6px;
             opacity: 0.2;
@@ -65,8 +65,32 @@ $grey: #acacac;
             &.active, &:hover {
                 opacity: 0.8;
                 margin: 0 4px;
-                height: $dotSize*1.4;
-                width: $dotSize*1.4;
+                height: $dotSize*1.35;
+                width: $dotSize*1.35;
+            }
+        }
+
+        div {
+            width: $dotSize;
+            height: $dotSize;
+            margin: 0 6px;
+            border-style: solid;
+            opacity: 0.2;
+
+            &.adaPlay {
+                box-sizing: border-box;
+                border-color: transparent transparent transparent #ffffff;
+                border-width: 6px 0px 6px 11px;
+            }
+
+            &.adaPause {
+                border-style: double;
+                border-width: 0px 0px 0px 11px;
+                border-color: transparent transparent transparent #ffffff;
+            }
+
+            &:hover {
+                opacity: 0.8;
             }
         }
     }

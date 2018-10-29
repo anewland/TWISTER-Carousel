@@ -48,7 +48,7 @@
 .twister .dots--wrapper li {
   width: 11px;
   height: 11px;
-  background-color: white;
+  background-color: #ffffff;
   border-radius: 50%;
   margin: 0 6px;
   opacity: 0.2;
@@ -61,8 +61,32 @@
 .twister .dots--wrapper li.active, .twister .dots--wrapper li:hover {
   opacity: 0.8;
   margin: 0 4px;
-  height: 15.4px;
-  width: 15.4px;
+  height: 14.85px;
+  width: 14.85px;
+}
+
+.twister .dots--wrapper div {
+  width: 11px;
+  height: 11px;
+  margin: 0 6px;
+  border-style: solid;
+  opacity: 0.2;
+}
+
+.twister .dots--wrapper div.adaPlay {
+  box-sizing: border-box;
+  border-color: transparent transparent transparent #ffffff;
+  border-width: 6px 0px 6px 11px;
+}
+
+.twister .dots--wrapper div.adaPause {
+  border-style: double;
+  border-width: 0px 0px 0px 11px;
+  border-color: transparent transparent transparent #ffffff;
+}
+
+.twister .dots--wrapper div:hover {
+  opacity: 0.8;
 }
 
 .item1 {
