@@ -253,9 +253,19 @@ twister.prototype.addDots = function() {
     for (var i = 0; i < _.count; i++) {
         var dot = document.createElement('li');
         dot.setAttribute('data-slide', i + 1);
-        dot.setAttribute('role', 'button');
+        dot.setAttribute('aria-role', 'menuitem');
         dotContainer.appendChild(dot);
     }
+
+    // add the ada play/pause button with the dots
+    var adaPlay = document.createElement('div');
+    if(_.def.autoplay == true) {
+        adaPlay.setAttribute('class', 'adaPause');
+    } else {
+        adaPlay.setAttribute('class', 'adaPlay');
+    }
+    adaPlay.setAttribute('role', 'button');
+    dotContainer.appendChild(adaPlay);
 
     _.dotContainer.addEventListener('click', function (e) {
         if (e.target && e.target.nodeName == "LI") {
@@ -265,6 +275,20 @@ twister.prototype.addDots = function() {
 
             if(_.def.autoplay == true)
                 _.autoPlay();
+        }
+
+        if (e.target && e.target.nodeName == "DIV") {
+            _.btn = e.target.getAttribute('class');
+
+            if (_.btn == 'adaPlay') {
+                adaPlay.setAttribute('class', 'adaPause');
+                console.log('[twister] play');
+                _.autoPlay();
+            } else {
+                adaPlay.setAttribute('class', 'adaPlay');
+                console.log('[twister] paused');
+                _.pause();
+            }
         }
     }, false);
 }
@@ -331,7 +355,7 @@ twister.prototype.gotoSlide = function (slide) {
 twister.prototype.goNext = function () {
     var _ = this;
 
-    if (_.isMoving == false) {
+    //if (_.isMoving == false) {
         _.isMoving = true;
         //console.log('[twister] isMoving: '+_.isMoving);
 
@@ -350,7 +374,7 @@ twister.prototype.goNext = function () {
             _.curSlide++;
             _.sliderInner.style.left = '-' + _.curSlide * 100 + '%';
             // reset back to the first card after a small delay. this removes the transition so that the user doesnt know whats happening
-            setTimeout(resetToBegining, _.def.interval);
+            setTimeout(resetToBegining, (_.def.interval/2));
         }
         _.sliderInner.querySelectorAll('div')[_.curSlide].setAttribute("aria-hidden", "false");
         _.direction = 'next';
@@ -363,16 +387,16 @@ twister.prototype.goNext = function () {
         }
 
         setTimeout(function(){_.isMoving = false}, _.def.interval);
-    }
+    //}
 
-    if(_.def.autoplay == true)
+    if(_.autoplayActive == true)
         _.autoPlay();
 }
 
 twister.prototype.goPrev = function () {
     var _ = this;
 
-    if (_.isMoving == false) {
+    //if (_.isMoving == false) {
         _.isMoving = true;
         //console.log('[twister] isMoving: '+_.isMoving);
 
@@ -404,18 +428,23 @@ twister.prototype.goPrev = function () {
         }
 
         setTimeout(function(){_.isMoving = false}, _.def.interval);
-    }
+    //}
 
-    if(_.def.autoplay == true)
+    if(_.autoplayActive == true)
         _.autoPlay();
 }
 
 twister.prototype.autoPlay = function () {
     var _ = this;
-    _.aP = setTimeout(function(){_.goNext()}, _.def.interval);
+
+    _.autoplayActive = true;
+    if(_.autoplayActive == true)
+        _.aP = setTimeout(function(){_.goNext()}, _.def.interval);
 }
 
 twister.prototype.pause = function () {
     var _ = this;
+
+    _.autoplayActive = false;
     clearTimeout(_.aP);
 }
